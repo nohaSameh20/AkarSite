@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkaraProject", "AkaraProject\AkaraProject.csproj", "{A6AD87A5-9609-4779-9CB6-92DC361C33DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6AD87A5-9609-4779-9CB6-92DC361C33DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6AD87A5-9609-4779-9CB6-92DC361C33DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6AD87A5-9609-4779-9CB6-92DC361C33DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6AD87A5-9609-4779-9CB6-92DC361C33DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11DD3B09-AF02-4FF5-BB02-768E027FADBF}
+	EndGlobalSection
+EndGlobal
