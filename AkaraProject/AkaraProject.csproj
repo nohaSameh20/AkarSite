@@ -160,9 +160,15 @@
     <Compile Include="Migrations\202104300112111_mig04.designer.cs">
       <DependentUpon>202104300112111_mig04.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105080049118_mig05.cs" />
+    <Compile Include="Migrations\202105080049118_mig05.designer.cs">
+      <DependentUpon>202105080049118_mig05.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertising\Advertising.cs" />
-    <Compile Include="Models\Enums.cs" />
+    <Compile Include="Models\Comments\Comment.cs" />
+    <Compile Include="Models\Comments\UserComments.cs" />
+    <Compile Include="Models\Enums\Enums.cs" />
     <Compile Include="Models\Roles\Role.cs" />
     <Compile Include="Models\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -424,6 +430,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104300112111_mig04.resx">
       <DependentUpon>202104300112111_mig04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105080049118_mig05.resx">
+      <DependentUpon>202105080049118_mig05.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
