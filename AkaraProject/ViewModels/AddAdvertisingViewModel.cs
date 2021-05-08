@@ -23,6 +23,8 @@ namespace AkaraProject.ViewModels
         [Required(ErrorMessage = "Image is required")]
         public string Image { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        [Required]
         public BuildingStatus BuildingStatus { get; set; }
         public AdvertisingStatuse AdvertisingStatuse { get; set; }
 

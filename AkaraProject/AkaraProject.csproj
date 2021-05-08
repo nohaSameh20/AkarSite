@@ -164,6 +164,22 @@
     <Compile Include="Migrations\202105080049118_mig05.designer.cs">
       <DependentUpon>202105080049118_mig05.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105081346108_mig06.cs" />
+    <Compile Include="Migrations\202105081346108_mig06.designer.cs">
+      <DependentUpon>202105081346108_mig06.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105081355267_mig08.cs" />
+    <Compile Include="Migrations\202105081355267_mig08.designer.cs">
+      <DependentUpon>202105081355267_mig08.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105081358264_mig09.cs" />
+    <Compile Include="Migrations\202105081358264_mig09.designer.cs">
+      <DependentUpon>202105081358264_mig09.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105081406026_mig10.cs" />
+    <Compile Include="Migrations\202105081406026_mig10.designer.cs">
+      <DependentUpon>202105081406026_mig10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertising\Advertising.cs" />
     <Compile Include="Models\Comments\Comment.cs" />
@@ -414,6 +430,7 @@
     <Content Include="Content\css\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Views\Advertising\Add.cshtml" />
+    <Content Include="Views\Advertising\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202104291155157_initial_migration.resx">
@@ -433,6 +450,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105080049118_mig05.resx">
       <DependentUpon>202105080049118_mig05.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105081346108_mig06.resx">
+      <DependentUpon>202105081346108_mig06.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105081355267_mig08.resx">
+      <DependentUpon>202105081355267_mig08.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105081358264_mig09.resx">
+      <DependentUpon>202105081358264_mig09.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105081406026_mig10.resx">
+      <DependentUpon>202105081406026_mig10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -43,6 +43,7 @@ namespace AkaraProject.Controllers
                     });
                     return View(result);
                 }
+
                  query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved);
                  data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                  result = data.Select(obj => new AddAdvertisingViewModel()

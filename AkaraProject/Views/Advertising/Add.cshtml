@@ -62,7 +62,7 @@
                                     <div class="col-lg-9 col-md-7 col-12">
                                         <div class="input-file">
                                             <label>Title</label>
-                                            @Html.TextBoxFor(m => m.Title, new { placeholder = "Enter your title here" ,required = "required" })
+                                            @Html.TextBoxFor(m => m.Title, new { placeholder = "Enter your title here", required = "required" })
                                             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -98,17 +98,36 @@
                                 <div class="col-md-6 col-12">
                                     <div class="input-file">
                                         <label>Location</label>
-                                        @Html.TextBoxFor(m => m.Location, new { placeholder = "Enter Location" , required = "required" })
+                                        @Html.TextBoxFor(m => m.Location, new { placeholder = "Enter Location", required = "required" })
                                         @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-                                       
+
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
+                                <div class="col-md-3 col-12">
                                     <div class="input-file">
                                         <label>UnitType</label>
                                         @Html.DropDownListFor(m => m.UnitType, new SelectList(Enum.GetValues(typeof(UnitType))), "Select UnitType")
                                         @Html.ValidationMessageFor(model => model.UnitType, "", new { @class = "text-danger" })
                                     </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="input-file">
+                                        <label>Building Status</label>
+                                        @*@Html.DropDownListFor(m => m.BuildingStatus, (userStatus) => { return userStatus != BuildingStatus.Close }, new SelectList(Enum.GetValues(typeof(BuildingStatus))), "Select Building Status")
+                                        @Html.ValidationMessageFor(model => model.BuildingStatus, "", new { @class = "text-danger" })*@
+                                        @{
+                                            var selectList = Enum.GetValues(typeof(BuildingStatus))
+                                                                 .Cast<BuildingStatus>()
+                                                                 .Where(e => e != BuildingStatus.Close)
+                                                                 .Select(e => new SelectListItem
+                                                                 {
+                                                                     Value = ((int)e).ToString(),
+                                                                     Text = e.ToString()
+                                                                 });
+                                        }
+                                        @Html.DropDownListFor(m => m.BuildingStatus, selectList)
+                                    </div>
+                                   
                                 </div>
                             </div>
                             <div class="row">
