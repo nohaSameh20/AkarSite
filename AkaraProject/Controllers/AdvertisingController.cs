@@ -10,6 +10,7 @@ using AkaraProject.CustomeAuthentication;
 using System.IO;
 using System.Web.Helpers;
 using System.Text;
+using AkaraProject.Models.Comments;
 
 namespace AkaraProject.Controllers
 {
@@ -109,6 +110,66 @@ namespace AkaraProject.Controllers
             }
 
             return RedirectToAction("Add", "Advertising");
+
+        }
+
+        public ActionResult Details()
+        {
+
+            HttpCookie Id = HttpContext.Request.Cookies.Get("AdvertisingId");
+            var id = Guid.Parse(Id.Value.ToString());
+
+            var adver = dBContext.Advertisings.Include("Comments").SingleOrDefault(o => o.Id == id);
+             
+
+            AddAdvertisingViewModel result = new AddAdvertisingViewModel()
+            {
+                Id=adver.Id,
+                AdvertisingStatuse=adver.AdvertisingStatuse,
+                Description=adver.Description,
+                Area=adver.Area,
+                CreatedAt=adver.CreatedAt,
+                BuildingStatus=adver.BuildingStatus,
+                Image=adver.Image,
+                Location=adver.Location,
+                NoRoom=adver.NoRoom,
+                Price=adver.Price,
+                Title=adver.Title,
+                UnitType=adver.UnitType,
+                comments=adver.Comments
+            };
+          
+            return View(result);
+        }
+
+
+        [HttpPost]
+        public ActionResult AddComment(AddAdvertisingViewModel model)
+        {
+            HttpCookie Id = HttpContext.Request.Cookies.Get("AdvertisingId");
+            var id = Guid.Parse(Id.Value.ToString());
+            ApplicationDBContext dBContext = new ApplicationDBContext();
+            if (ModelState.IsValid)
+            {
+                Comment comment = new Comment()
+                {
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.Now,
+                    Content=model.Content,
+                    Subject=model.Subject,
+                    AdvertisingId= id
+                };
+                
+                dBContext.Comments.Add(comment);
+
+                dBContext.SaveChanges();
+            }
+            else
+            {
+                return RedirectToAction("AddComment");
+            }
+            
+            return RedirectToAction("Details", "Advertising");
 
         }
 

@@ -26,7 +26,7 @@ namespace AkaraProject.Models.Users
         [ForeignKey(nameof(Role))]
         public Guid RoleId { set; get; }
 
-        public virtual ICollection<Advertising> Advertisings { get; set; }
+       // public virtual ICollection<Advertising> Advertisings { get; set; }
 
     }
 }

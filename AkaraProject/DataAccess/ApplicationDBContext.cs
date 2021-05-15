@@ -15,18 +15,19 @@ namespace AkaraProject.DataAccess
         public ApplicationDBContext()
             : base("AkarDB")
         {
-           
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserComments>().HasKey(obj => new { obj.UserId, obj.CommentId });
+            // modelBuilder.Entity<UserComments>().HasKey(obj => new { obj.UserId, obj.CommentId });
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
         public DbSet<Advertising> Advertisings { get; set; }
-        public DbSet<UserComments> UserComments { get; set; }
+       // public DbSet<UserComments> UserComments { get; set; }
 
     }
 

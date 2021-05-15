@@ -20,12 +20,14 @@ namespace AkaraProject.Controllers
             IQueryable<Advertising> query;
             List<Advertising> data;
             IEnumerable<AddAdvertisingViewModel> result;
+
             var identity = (System.Web.HttpContext.Current?.User);
             if (ModelState.IsValid)
             {
                 if (identity.IsInRole("Admin"))
                 {
-                    query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Pending);
+                    List<AdvertisingStatuse> statuse = new List<AdvertisingStatuse>() { AdvertisingStatuse.Pending, AdvertisingStatuse.Cancelled };
+                    query = dBContext.Advertisings.Where(ob => statuse.Contains(ob.AdvertisingStatuse));
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                     result = data.Select(obj => new AddAdvertisingViewModel()
                     {
@@ -76,16 +78,24 @@ namespace AkaraProject.Controllers
             return RedirectToAction("Index");
         }
 
-        
         public ActionResult Cancel(Guid Id)
         {
             var adver = dBContext.Advertisings.SingleOrDefault(obj => obj.Id == Id);
             if (adver.AdvertisingStatuse == AdvertisingStatuse.Pending)
                 adver.AdvertisingStatuse = AdvertisingStatuse.Cancelled;
-            dBContext.Advertisings.Remove(adver);
             dBContext.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Details(Guid Id)
+        {
+            HttpCookie cookie = new HttpCookie("AdvertisingId", Id.ToString());
+            cookie.Expires = DateTime.Now.AddDays(1);
+            Response.Cookies.Add(cookie);
+
+            return RedirectToAction("Details", "Advertising");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -97,6 +107,11 @@ namespace AkaraProject.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Services()
+        {
             return View();
         }
     }

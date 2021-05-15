@@ -18,6 +18,7 @@ namespace AkaraProject.Controllers
 {
     public class AccountController : Controller
     {
+         
         // GET: Account
         public ActionResult Index()
         {
@@ -44,6 +45,7 @@ namespace AkaraProject.Controllers
                 if (Membership.ValidateUser(loginView.Name, loginView.Password))
                 {
                     var user = (CustomMembershipUser)Membership.GetUser(loginView.Name, false);
+                  
                     if (user != null)
                     {
                         CustomSerializeModel userModel = new CustomSerializeModel()
@@ -99,6 +101,7 @@ namespace AkaraProject.Controllers
 
             if (ModelState.IsValid)
             {
+                
                 // Email Verification  
                 string userName = Membership.GetUserNameByEmail(registrationView.UserEmail);
                 if (!string.IsNullOrEmpty(userName))
@@ -106,10 +109,19 @@ namespace AkaraProject.Controllers
                     ModelState.AddModelError("Warning Email", "Sorry: Email already Exists");
                     return View(registrationView);
                 }
+                
 
                 //Save User Data   
                 using (ApplicationDBContext dbContext = new ApplicationDBContext())
                 {
+                    var userExist = dbContext.Users.Any(ob => ob.PhoneNumber == registrationView.Phone);
+                    if (userExist)
+                    {
+                        messageRegistration = "Sorry,this phone number is already exist. ^_^";
+                        TempData["ErrorMessage"] = messageRegistration;
+                        return View(registrationView);
+                    }
+
                     var user = new User()
                     {
                         UserName = registrationView.Name,
@@ -121,21 +133,21 @@ namespace AkaraProject.Controllers
                         CreatedAt=DateTime.Now,
                         RoleId=dbContext.Roles.SingleOrDefault(ob=>ob.Name== "User").Id
                     };
-                    
 
+                  
                     dbContext.Users.Add(user);
                     dbContext.SaveChanges();
 
                 }
-
-
                 
                 messageRegistration = "Your account has been created successfully. ^_^";
+                TempData["SucessMessage"] = messageRegistration;
                 statusRegistration = true;
             }
             else
             {
                 messageRegistration = "Something Wrong!";
+                TempData["ErrorMessage"] = messageRegistration;
             }
             ViewBag.Message = messageRegistration;
             ViewBag.Status = statusRegistration;
@@ -153,9 +165,6 @@ namespace AkaraProject.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account", null);
         }
-
-
-        
 
     }
 }

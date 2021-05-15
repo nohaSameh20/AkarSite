@@ -1,4 +1,5 @@
-﻿using AkaraProject.Models.Users;
+﻿using AkaraProject.Models.Comments;
+using AkaraProject.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -32,6 +33,7 @@ namespace AkaraProject.Models
         [ForeignKey(nameof(User))]
         public Guid UserId { set; get; }
 
-       
+        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }

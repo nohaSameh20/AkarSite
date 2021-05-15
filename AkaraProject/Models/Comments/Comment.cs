@@ -15,11 +15,18 @@ namespace AkaraProject.Models.Comments
         public Guid Id { get; set; }
 
         [Required]
+        public string Subject { get; set; }
+
+        [Required]
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public virtual ICollection<Advertising> Advertisings { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        //public virtual ICollection<User> Users { get; set; }
+
+        public Advertising Advertising { set; get; }
+        [ForeignKey(nameof(Advertising))]
+
+        public Guid? AdvertisingId { set; get; }
 
     }
 }

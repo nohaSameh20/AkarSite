@@ -1,8 +1,9 @@
 ﻿namespace AkaraProject.Migrations
 {
-    using AkaraProject.DataAccess;
+    using AkaraProject.Models.Roles;
     using AkaraProject.Models.Users;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -16,6 +17,23 @@
 
         protected override void Seed(AkaraProject.DataAccess.ApplicationDBContext context)
         {
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+            //  to avoid creating duplicate seed data.
+            List<string> Roles = new List<string>() { "Admin", "User" };
+            if (!context.Roles.Any(cnt => Roles.Contains(cnt.Name)))
+            {
+                List<Role> roles = new List<Role>()
+                {
+                   new Role(){Id=Guid.NewGuid(),Name="Admin"},
+                   new Role(){Id=Guid.NewGuid(),Name="User"}
+                };
+                context.Roles.AddRange(roles);
+                context.SaveChanges();
+            }
+
+
             if (!context.Users.Any(cnt => cnt.Email.ToUpper() == "SYSTEM@ADMIN.COM"))
             {
                 // Add admin 
@@ -33,12 +51,12 @@
                 // Update Database 
                 context.Users.Add(admin);
                 context.SaveChanges();
+
             }
 
-            //  This method will be called after migrating to the latest version.
 
-                //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-                //  to avoid creating duplicate seed data.
+
+
         }
     }
 }

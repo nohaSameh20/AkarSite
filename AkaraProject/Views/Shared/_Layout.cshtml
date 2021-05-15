@@ -60,7 +60,9 @@
                                             <li>
                                                 @Html.ActionLink("Home", "Index", "Home")
                                             </li>
-                                            <li><a href="about-us.html">About</a></li>
+                                            <li>
+                                                @Html.ActionLink("About", "About", "Home")
+                                            </li>
 
                                             @if (!(HttpContext.Current.User.Identity.IsAuthenticated))
                                             {
@@ -76,9 +78,9 @@
                                                 </li>
                                             }
 
-                                            <li><a href="contact.html"> Contact</a></li>
+                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                                            <li><a href="services.html"> Services</a></li>
+                                            <li> @Html.ActionLink("Services", "Services", "Home")</li>
 
 
                                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -122,7 +124,7 @@
                                         @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                         {
                                             var identity = ((CustomPrincipal)HttpContext.Current.User);
-                                            @Html.Label(string.Format("Welcome {0}", identity.Name,new { @style= "color: #3791c5;" }))
+                                            @Html.Label(string.Format("Welcome {0}", identity.Name, new { @style = "color: #3791c5;" }))
                                             @Html.ActionLink("Log out", "LogOut", "Account")
                                         }
                                     </li>
@@ -141,11 +143,40 @@
 
         <div class=" body-content">
             @RenderBody()
+
         </div>
+
+        @if (@TempData["ErrorMessage"] != null)
+        {
+
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" style="background-color: #ff0637;margin-bottom: 84px;color:white">
+                    <strong>@TempData["ErrorMessage"]</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+
+
+        @if (@TempData["SucessMessage"] != null)
+        {
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="alert alert-secondary alert-dismissible fade show d-flex justify-content-center" role="alert" style="background-color: #016701;margin-bottom: 84px;color: white">
+                        <strong>@TempData["SucessMessage"]</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+        }
 
         <footer class="footer wow fadeIn" data-wow-duration="1.3s" data-wow-delay="0.5s">
             <!--Footer bottom start-->
             <div class="footer-bottom">
+
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-7 col-12">

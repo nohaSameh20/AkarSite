@@ -52,9 +52,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework.SqlServerCompact, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.SqlServerCompact.6.4.4\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -140,45 +146,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104291155157_initial_migration.cs" />
-    <Compile Include="Migrations\202104291155157_initial_migration.designer.cs">
-      <DependentUpon>202104291155157_initial_migration.cs</DependentUpon>
+    <Compile Include="Migrations\202105151052092_mig01.cs" />
+    <Compile Include="Migrations\202105151052092_mig01.designer.cs">
+      <DependentUpon>202105151052092_mig01.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104292132360_mig01.cs" />
-    <Compile Include="Migrations\202104292132360_mig01.designer.cs">
-      <DependentUpon>202104292132360_mig01.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104292135577_mig02.cs" />
-    <Compile Include="Migrations\202104292135577_mig02.designer.cs">
-      <DependentUpon>202104292135577_mig02.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104292237343_mig03.cs" />
-    <Compile Include="Migrations\202104292237343_mig03.designer.cs">
-      <DependentUpon>202104292237343_mig03.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104300112111_mig04.cs" />
-    <Compile Include="Migrations\202104300112111_mig04.designer.cs">
-      <DependentUpon>202104300112111_mig04.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105080049118_mig05.cs" />
-    <Compile Include="Migrations\202105080049118_mig05.designer.cs">
-      <DependentUpon>202105080049118_mig05.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105081346108_mig06.cs" />
-    <Compile Include="Migrations\202105081346108_mig06.designer.cs">
-      <DependentUpon>202105081346108_mig06.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105081355267_mig08.cs" />
-    <Compile Include="Migrations\202105081355267_mig08.designer.cs">
-      <DependentUpon>202105081355267_mig08.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105081358264_mig09.cs" />
-    <Compile Include="Migrations\202105081358264_mig09.designer.cs">
-      <DependentUpon>202105081358264_mig09.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105081406026_mig10.cs" />
-    <Compile Include="Migrations\202105081406026_mig10.designer.cs">
-      <DependentUpon>202105081406026_mig10.cs</DependentUpon>
+    <Compile Include="Migrations\202105151116142_mig02.cs" />
+    <Compile Include="Migrations\202105151116142_mig02.designer.cs">
+      <DependentUpon>202105151116142_mig02.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertising\Advertising.cs" />
@@ -431,37 +405,15 @@
     <None Include="packages.config" />
     <Content Include="Views\Advertising\Add.cshtml" />
     <Content Include="Views\Advertising\Index.cshtml" />
+    <Content Include="Views\Advertising\Details.cshtml" />
+    <Content Include="Views\Home\Services.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202104291155157_initial_migration.resx">
-      <DependentUpon>202104291155157_initial_migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105151052092_mig01.resx">
+      <DependentUpon>202105151052092_mig01.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104292132360_mig01.resx">
-      <DependentUpon>202104292132360_mig01.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104292135577_mig02.resx">
-      <DependentUpon>202104292135577_mig02.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104292237343_mig03.resx">
-      <DependentUpon>202104292237343_mig03.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104300112111_mig04.resx">
-      <DependentUpon>202104300112111_mig04.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105080049118_mig05.resx">
-      <DependentUpon>202105080049118_mig05.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105081346108_mig06.resx">
-      <DependentUpon>202105081346108_mig06.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105081355267_mig08.resx">
-      <DependentUpon>202105081355267_mig08.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105081358264_mig09.resx">
-      <DependentUpon>202105081358264_mig09.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105081406026_mig10.resx">
-      <DependentUpon>202105081406026_mig10.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105151116142_mig02.resx">
+      <DependentUpon>202105151116142_mig02.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
