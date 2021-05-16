@@ -83,7 +83,6 @@ namespace AkaraProject.Controllers
                 WebImage image = WebImage.GetImageFromRequest();
                 byte[] fileBytes = image.GetBytes();
                 string base64 = Convert.ToBase64String(fileBytes);
-                
 
                 Advertising advertising = new Advertising()
                 {
@@ -101,14 +100,16 @@ namespace AkaraProject.Controllers
                     UserId = identity.UserId,
                     Image= base64
                 };
+
                 dBContext.Advertisings.Add(advertising);
                 dBContext.SaveChanges();
             }
             else
             {
+                TempData["ErrorMessage"] = "Some Thing Error,Please Call Customer Service";
                 return RedirectToAction("Add");
             }
-
+            TempData["SucessMessage"] = "Property Addedd Successfully!!";
             return RedirectToAction("Add", "Advertising");
 
         }

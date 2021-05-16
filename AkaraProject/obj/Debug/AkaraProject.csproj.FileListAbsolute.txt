@@ -172,7 +172,8 @@ D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.csproj.CopyComplete
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.dll
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.pdb
-D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.csprojAssemblyReference.cache
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.Migrations.mig01.resources
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.csproj.GenerateResource.cache
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.Migrations.mig02.resources
+D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.Migrations.mig03.resources
+D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Debug\AkaraProject.Migrations.mig04.resources

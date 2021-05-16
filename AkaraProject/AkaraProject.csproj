@@ -154,6 +154,14 @@
     <Compile Include="Migrations\202105151116142_mig02.designer.cs">
       <DependentUpon>202105151116142_mig02.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105162028421_mig03.cs" />
+    <Compile Include="Migrations\202105162028421_mig03.designer.cs">
+      <DependentUpon>202105162028421_mig03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202105162050046_mig04.cs" />
+    <Compile Include="Migrations\202105162050046_mig04.designer.cs">
+      <DependentUpon>202105162050046_mig04.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertising\Advertising.cs" />
     <Compile Include="Models\Comments\Comment.cs" />
@@ -407,6 +415,7 @@
     <Content Include="Views\Advertising\Index.cshtml" />
     <Content Include="Views\Advertising\Details.cshtml" />
     <Content Include="Views\Home\Services.cshtml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202105151052092_mig01.resx">
@@ -414,6 +423,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105151116142_mig02.resx">
       <DependentUpon>202105151116142_mig02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105162028421_mig03.resx">
+      <DependentUpon>202105162028421_mig03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105162050046_mig04.resx">
+      <DependentUpon>202105162050046_mig04.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

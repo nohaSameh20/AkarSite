@@ -107,7 +107,7 @@
                                             <div class="property-desc">
                                                 <div class="property-desc-top">
                                                     <h6><a href="#">@item.Title</a></h6>
-                                                    <h4 class="price" style="color:white">$@item.Price</h4>
+                                                    <h4 class="price" style="color:white;padding-top: 34px">$@item.Price</h4>
                                                     <div class="property-location">
                                                         <p>
                                                             <img src="~/Content/Images/property/icon-5.png" alt="">@item.Location
@@ -138,15 +138,17 @@
                                                                     </li>
 
 
-                                                                    if (item.BuildingStatus != AkaraProject.Models.BuildingStatus.Close)
-                                                                    {
 
-                                                                        <li>
-                                                                            <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-
-                                                                        </li>
-                                                                    }
                                                                 }
+
+                                                            }
+                                                            @if (item.BuildingStatus != AkaraProject.Models.BuildingStatus.Close)
+                                                            {
+
+                                                            <li>
+                                                                <span><i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i></span>
+
+                                                            </li>
                                                             }
                                                             <li>
                                                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -154,13 +156,13 @@
                                                                     var identity = ((CustomPrincipal)HttpContext.Current.User);
                                                                     if (identity.Role == "Admin" && item.AdvertisingStatuse == AkaraProject.Models.AdvertisingStatuse.Pending)
                                                                     {
-                                                                        @Html.ActionLink("Approve", "Approve", "Home", new { id = item.Id }, new { @style = "color:white;text-decoration:none;padding-right:12px;padding-left:12px" })
+                                                                        @Html.ActionLink("Approve", "Approve", "Home", new { id = item.Id,@class="ActivateRow" }, new { @style = "color:white;text-decoration:none;padding-right:12px;padding-left:12px" })
 
                                                                         @Html.ActionLink("Cancel", "Cancel", "Home", new { id = item.Id }, new { @style = "color:white;text-decoration:none;padding-right:12px" })
 
                                                                     }
                                                                 }
-                                                              
+
 
                                                             </li>
                                                             <li>
@@ -201,7 +203,7 @@
         @if (Model.Count() == 0)
         {
            <div class="row">
-              <p >No Data To Be Shown ....</p>
+              <p >You Don`t Have Properites Yet!</p>
             </div>
         }
     </div>
@@ -666,3 +668,13 @@
 <script src="~/Scripts/style-customizer.js"></script>
 <script src="~/Scripts/plugins.js"></script>
 <script src="~/Scripts/main.js"></script>
+
+<script>
+    $('.ActivateRow').click(function () {
+        var url = "/Home/Approve";
+        $.get(url, null, function (data) {
+            alert("hi")
+           
+        });
+    }) 
+</script>

@@ -35,7 +35,7 @@
                 foreach (var item in Model)
                 {
                     <div class="col-lg-4 col-md-6 col-12">
-                        <div class="single-property mb-40 fadeInUp wow" data-wow-delay="0.2s">
+                        <div class="single-property mb-40 fadeInUp wow" style="height:500px" data-wow-delay="0.2s">
                             <span>@item.BuildingStatus</span>
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                             {
@@ -46,18 +46,18 @@
                                     <span>@item.AdvertisingStatuse</span>
                                 }
                             }
-                            <div class="property-img">
-                                <a href="single-properties.html">
-                                    <img src="data:image/png;base64,@item.Image" alt="">
+                            <div class="property-img" style=" height: 196px;">
+                                <a href="#">
+                                    <img style="height:281px;" src="data:image/png;base64,@item.Image" alt="">
                                 </a>
                             </div>
-                            <div class="property-desc">
+                            <div class="property-desc" style="height: 172px;">
                                 <div class="property-desc-top">
-                                    <h6><a href="single-properties.html">@item.Title</a></h6>
+                                    <h6><a href="#">@item.Title</a></h6>
                                     <h4 class="price">@item.Price</h4>
                                     <div class="property-location">
                                         <p>
-                                            <img src="~/Content/Images/property/icon-5.png" alt="">@item.Location
+                                            <img  src="~/Content/Images/property/icon-5.png" alt="">@item.Location
                                         </p>
                                     </div>
                                 </div>
@@ -107,6 +107,9 @@
                                                     }
                                                 }
 
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Details", "Details", "Home", new { id = item.Id }, new { @style = "color:white;text-decoration:none" })
                                             </li>
 
                                         </ul>

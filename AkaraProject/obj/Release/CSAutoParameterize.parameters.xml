@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="AkarDB-Web.config Connection String" description="AkarDB Connection String used in web.config by the application to access the database." defaultValue="Data Source=SQL5104.site4now.net;Initial Catalog=db_a74666_akarmap;User Id=db_a74666_akarmap_admin;Password=P@ssw0rd" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Student_Project_gra\\Akar\.Domain\\AkaraSite_Backend\\AkarMapProject\\AkaraProject\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AkarDB']/@connectionString" />
+  </parameter>
+</parameters>
