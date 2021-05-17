@@ -17,9 +17,8 @@ namespace AkaraProject.ViewModels
         [Required]
         public string UserEmail { get; set; }
 
-       
+        [Required]
         public string Phone { get; set; }
-
         
         public string Image { get; set; }
 

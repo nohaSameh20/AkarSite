@@ -11,7 +11,6 @@ using System.IO;
 using System.Web.Helpers;
 using System.Text;
 using AkaraProject.Models.Comments;
-
 namespace AkaraProject.Controllers
 {
     public class AdvertisingController : Controller
@@ -106,7 +105,7 @@ namespace AkaraProject.Controllers
             }
             else
             {
-                TempData["ErrorMessage"] = "Some Thing Error,Please Call Customer Service";
+                TempData["ErrorMessage"]="Some Thing Error,Please Call Customer Service";
                 return RedirectToAction("Add");
             }
             TempData["SucessMessage"] = "Property Addedd Successfully!!";
@@ -119,10 +118,8 @@ namespace AkaraProject.Controllers
 
             HttpCookie Id = HttpContext.Request.Cookies.Get("AdvertisingId");
             var id = Guid.Parse(Id.Value.ToString());
-
-            var adver = dBContext.Advertisings.Include("Comments").SingleOrDefault(o => o.Id == id);
+            var adver = dBContext.Advertisings.Include("Comments.User").Include("Comments").Where(o => o.Id == id).SingleOrDefault();
              
-
             AddAdvertisingViewModel result = new AddAdvertisingViewModel()
             {
                 Id=adver.Id,
@@ -147,6 +144,7 @@ namespace AkaraProject.Controllers
         [HttpPost]
         public ActionResult AddComment(AddAdvertisingViewModel model)
         {
+           var user= System.Web.HttpContext.Current?.User.Identity.Name.Length;
             HttpCookie Id = HttpContext.Request.Cookies.Get("AdvertisingId");
             var id = Guid.Parse(Id.Value.ToString());
             ApplicationDBContext dBContext = new ApplicationDBContext();
@@ -158,11 +156,14 @@ namespace AkaraProject.Controllers
                     CreatedAt = DateTime.Now,
                     Content=model.Content,
                     Subject=model.Subject,
-                    AdvertisingId= id
+                    AdvertisingId= id,
                 };
-                
+                if (user != 0)
+                {
+                    var identity = ((CustomPrincipal)System.Web.HttpContext.Current?.User);
+                    comment.UserId = identity.UserId;
+                }
                 dBContext.Comments.Add(comment);
-
                 dBContext.SaveChanges();
             }
             else

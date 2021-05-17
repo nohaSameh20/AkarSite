@@ -54,11 +54,10 @@ namespace AkaraProject.Controllers
                             UserId = user.UserId,
                             Name = user.Name,
                             UserEmail = user.Email,
-                            //Image=user.Image,
+                            Image=user.Image,
                             Phone=user.Phone,
                             RoleName=user.RoleName,
                             Password=user.Password,
-                            
                         };
                        
                         string userData = JsonConvert.SerializeObject(userModel);

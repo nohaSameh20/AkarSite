@@ -1,4 +1,5 @@
-﻿using AkaraProject.Models.Roles;
+﻿using AkaraProject.Models.Comments;
+using AkaraProject.Models.Roles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,7 +27,7 @@ namespace AkaraProject.Models.Users
         [ForeignKey(nameof(Role))]
         public Guid RoleId { set; get; }
 
-       // public virtual ICollection<Advertising> Advertisings { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
     }
 }

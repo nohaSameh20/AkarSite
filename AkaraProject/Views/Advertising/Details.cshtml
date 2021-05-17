@@ -56,7 +56,7 @@
                     <div class="condition-amenities">
                         <div class="row">
                             <div class="col-lg-12 col-12">
-                                <div class="amenities">
+                                <div class="amenities" >
                                     <div class="amenities-title">
                                         <h5>Details:</h5>
                                     </div>
@@ -64,16 +64,15 @@
                                         <ul>
                                             <li>
                                                 <i class="fa fa-check-square-o"></i>
-                                                <span>Title: @Model.Title</span>
+                                                <span>Location: @Model.Location</span>
                                             </li>
-                                            <li> <img src="~/Content/Images/property/icon-6.png" alt=""><span>Area @Model.Area</span></li>
-                                            <li><i class="fa fa-check-square-o"></i><span>Price @Model.Price</span></li>
+                                            <li><img src="~/Content/Images/property/icon-6.png" alt=""><span>Area @Model.Area</span></li>
+                                            <li><i class="fa fa-check-square-o"></i><span>Price: @Model.Price</span></li>
                                             <li><img src="~/Content/Images/property/icon-7.png" alt=""><span>Bedroom: @Model.NoRoom</span></li>
                                             <li><i class="fa fa-check-square-o"></i> <span>ForWhat: @Model.BuildingStatus</span></li>
-                                            <li> <img src="~/Content/Images/property/icon-9.png" alt=""><span>UnitType: @Model.UnitType</span></li>
-                                            <li><i class="fa fa-check-square-o"></i> <span>Location: @Model.Location</span></li>
-                                            <li><i class="fa fa-check-square-o"></i> <span>Statuse: @Model.AdvertisingStatuse</span></li>
-                                            <li><i class="fa fa-check-square-o"></i> <span>Created Date @Model.CreatedAt</span></li>
+                                            <li><img src="~/Content/Images/property/icon-9.png" alt=""><span>UnitType: @Model.UnitType</span></li>
+                                            @*<li><i class="fa fa-check-square-o"></i> <span>Statuse: @Model.AdvertisingStatuse</span></li>*@
+                                            <li><i class="fa fa-check-square-o"></i> <span>Created Date: @Model.CreatedAt</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -90,18 +89,44 @@
                     @foreach (var item in Model.comments)
                     {
                         <div class="single-feedback mb-35 fix">
-                            <div class="feedback-img">
-                                <img src="~/Content/Images/feedback/1.png" alt="">
-                            </div>
+                          
                             <div class="feedback-desc">
-                                <div class="feedback-title">
-                                    <h6>@item.Subject</h6>
+                                @if (item.User == null)
+                                {
+                                    <div class="feedback-img">
+                                        <img src="~/Content/Images/blank-picture-holder.png" alt="">
+                                    </div>
+                                    <h5 class="feedback-post">
+                                        UnKnown Person:
+                                    </h5>
+                                }
+                                @if (item.User != null)
+                                {
+                                    if (item.User.Image != null)
+                                    {
+                                    <div class="feedback-img">
+                                        <img src="data:image/png;base64,@item.User.Image" alt="">
+                                    </div>
+                                    }
+                                    if (item.User.Image == null)
+                                    {
+                                        <div class="feedback-img">
+                                            <img src="~/Content/Images/unnamed.png" alt="">
+                                        </div>
+                                    }
+                                    <h5 class="feedback-post">
+                                        -@item.User.UserName:
+                                    </h5>
+                                }
+                                <div class="review-desc">
+                                    <h6>-@item.Subject</h6>
                                 </div>
+
+                                <h6 class="review-desc">
+                                    -@item.Content
+                                </h6>
                                 <p class="feedback-post">
-                                    @item.CreatedAt
-                                </p>
-                                <p class="review-desc">
-                                    @item.Content
+                                    -@item.CreatedAt
                                 </p>
                             </div>
                         </div>

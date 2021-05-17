@@ -21,12 +21,16 @@ namespace AkaraProject.Models.Comments
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        //public virtual ICollection<User> Users { get; set; }
-
+        //===============Navigation Properites================//
         public Advertising Advertising { set; get; }
         [ForeignKey(nameof(Advertising))]
 
         public Guid? AdvertisingId { set; get; }
+
+        public User User { set; get; }
+        [ForeignKey(nameof(User))]
+
+        public Guid? UserId { set; get; }
 
     }
 }
