@@ -80,7 +80,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="tab-content" id="property-tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="sale" aria-labelledby="property-sale-tab">
+                    <div role="tabpanel" class="tab-pane active" id="sale" aria-labelledby="property-sale-tab" style="height:500px">
                         <div class="property-list owl-carousel">
                             @if (Model != null)
                             {
@@ -104,12 +104,12 @@
                                                     <img src="data:image/png;base64,@item.Image" style="height:200px" />
                                                 </a>
                                             </div>
-                                            <div class="property-desc">
-                                                <div class="property-desc-top">
-                                                    <h6><a href="#">@item.Title</a></h6>
-                                                    <h4 class="price" style="color:white;padding-top: 34px">$@item.Price</h4>
+                                            <div class="property-desc" style=" height: 200px;">
+                                                <div class="property-desc-top" >
+                                                    <h6><a style=" line-height: 24px;" href="#">@item.Title</a></h6>
+                                                    <h4 class="price" style="color:white;padding-top: 66px">$@item.Price</h4>
                                                     <div class="property-location">
-                                                        <p>
+                                                        <p >
                                                             <img src="~/Content/Images/property/icon-5.png" alt="">@item.Location
                                                         </p>
                                                     </div>
