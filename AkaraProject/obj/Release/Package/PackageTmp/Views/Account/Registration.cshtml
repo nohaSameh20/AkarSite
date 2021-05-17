@@ -85,7 +85,14 @@
                         @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
                     </div>
 
-                     
+                    <div class="image-upload-box">
+                        <label class="custom-file-upload">
+                            <span><i class="icofont icofont-folder-open"></i> Browse Image</span>
+                            @Html.TextBoxFor(model => model.Image, new { type = "file", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        </label>
+                    </div>
+
                     <div class="agree-text">
                         <p>
                             <label>

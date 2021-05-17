@@ -225,6 +225,7 @@
     <Content Include="Content\Images\apple-touch-icon.png" />
     <Content Include="Content\Images\awesome\feature.jpg" />
     <Content Include="Content\Images\bg\pattern.png" />
+    <Content Include="Content\Images\blank-picture-holder.png" />
     <Content Include="Content\Images\common\breadcrumbs.jpg" />
     <Content Include="Content\Images\common\download-caption.png" />
     <Content Include="Content\Images\common\download.jpg" />
@@ -341,6 +342,7 @@
     <Content Include="Content\Images\team\7.jpg" />
     <Content Include="Content\Images\team\8.jpg" />
     <Content Include="Content\Images\team\9.jpg" />
+    <Content Include="Content\Images\unnamed.png" />
     <Content Include="Content\Images\welcome\1.jpg" />
     <Content Include="Content\Images\welcome\3.png" />
     <Content Include="Content\Images\welcome\4.png" />

@@ -11,9 +11,10 @@
         background-size: cover;
     }
 
-    input, textarea,select {
+    input, textarea, select {
         max-width: 100% !important;
     }
+
     .add-property-submit {
         margin-bottom: 12px;
         text-align: center;
@@ -114,7 +115,7 @@
                                     <div class="input-file">
                                         <label>Building Status</label>
                                         @*@Html.DropDownListFor(m => m.BuildingStatus, (userStatus) => { return userStatus != BuildingStatus.Close }, new SelectList(Enum.GetValues(typeof(BuildingStatus))), "Select Building Status")
-                                        @Html.ValidationMessageFor(model => model.BuildingStatus, "", new { @class = "text-danger" })*@
+                                            @Html.ValidationMessageFor(model => model.BuildingStatus, "", new { @class = "text-danger" })*@
                                         @{
                                             var selectList = Enum.GetValues(typeof(BuildingStatus))
                                                                  .Cast<BuildingStatus>()
@@ -127,7 +128,7 @@
                                         }
                                         @Html.DropDownListFor(m => m.BuildingStatus, selectList)
                                     </div>
-                                   
+
                                 </div>
                             </div>
                             <div class="row">
@@ -168,11 +169,38 @@
                         </div>
                     </div>
                     <div class="add-property-submit">
-                        <button type="submit">ADD PRPPERTY</button>
+                        <button type="submit" id="btnPost">ADD PRPPERTY</button>
                     </div>
                 </div>
             </div>
         </div>
     }
-    </div>
+</div>
 <!-- Add property page End -->
+
+
+<script>
+
+    $("#btnPost").click(function () {
+        var adver = new AddAdvertisingViewModel();
+           $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Add")',
+            dataType: 'json',
+            data: JSON.stringify(adver),
+         success: function (data) {
+             alert("true");
+            },
+            error: function (ex) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+                alert("StackTrace: " + r.StackTrace);
+                alert("ExceptionType: " + r.ExceptionType);
+            }
+        });
+        return false;
+    }
+
+
+
+</script>
