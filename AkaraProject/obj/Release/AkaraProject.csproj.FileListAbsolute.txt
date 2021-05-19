@@ -90,4 +90,3 @@ D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Release\AkaraProject.pdb
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Release\AkaraProject.Migrations.mig06.resources
 D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Release\AkaraProject.Migrations.mig05.resources
-D:\Student_Project_gra\Akar.Domain\AkaraSite_Backend\AkarMapProject\AkaraProject\obj\Release\AkaraProject.csprojAssemblyReference.cache

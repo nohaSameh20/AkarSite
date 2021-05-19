@@ -80,7 +80,14 @@ namespace AkaraProject.Controllers
             if (ModelState.IsValid)
             {
                 WebImage image = WebImage.GetImageFromRequest();
+                if (image == null)
+                {
+                    TempData["ErrorMessage"] = "Please Add Image with extension jpg,jpeg,gif";
+                    return RedirectToAction("Add");
+                }
+                    
                 byte[] fileBytes = image.GetBytes();
+                 
                 string base64 = Convert.ToBase64String(fileBytes);
 
                 Advertising advertising = new Advertising()
