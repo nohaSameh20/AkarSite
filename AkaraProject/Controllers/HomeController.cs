@@ -19,7 +19,7 @@ namespace AkaraProject.Controllers
         {
             IQueryable<Advertising> query;
             List<Advertising> data;
-            IEnumerable<AddAdvertisingViewModel> result;
+            IEnumerable<AdevrtisingViewModel> result;
 
             var identity = (System.Web.HttpContext.Current?.User);
             if (ModelState.IsValid)
@@ -29,7 +29,7 @@ namespace AkaraProject.Controllers
                     List<AdvertisingStatuse> statuse = new List<AdvertisingStatuse>() { AdvertisingStatuse.Pending, AdvertisingStatuse.Cancelled };
                     query = dBContext.Advertisings.Where(ob => statuse.Contains(ob.AdvertisingStatuse));
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
-                    result = data.Select(obj => new AddAdvertisingViewModel()
+                    result = data.Select(obj => new AdevrtisingViewModel()
                     {
                         Id = obj.Id,
                         Area = obj.Area,
@@ -48,7 +48,7 @@ namespace AkaraProject.Controllers
 
                  query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved);
                  data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
-                 result = data.Select(obj => new AddAdvertisingViewModel()
+                 result = data.Select(obj => new AdevrtisingViewModel()
                 {
                     Id = obj.Id,
                     Area = obj.Area,

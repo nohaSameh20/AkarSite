@@ -21,7 +21,7 @@ namespace AkaraProject.Controllers
         {
             IQueryable<Advertising> query;
             List<Advertising> data;
-            IEnumerable<AddAdvertisingViewModel> result;
+            IEnumerable<AdevrtisingViewModel> result;
             var identity = (System.Web.HttpContext.Current?.User);
             if (ModelState.IsValid)
             {
@@ -29,7 +29,7 @@ namespace AkaraProject.Controllers
                 {
                     query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Pending);
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
-                    result = data.Select(obj => new AddAdvertisingViewModel()
+                    result = data.Select(obj => new AdevrtisingViewModel()
                     {
                         Id = obj.Id,
                         Area = obj.Area,
@@ -47,7 +47,7 @@ namespace AkaraProject.Controllers
                 }
                 query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved);
                 data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
-                result = data.Select(obj => new AddAdvertisingViewModel()
+                result = data.Select(obj => new AdevrtisingViewModel()
                 {
                     Id = obj.Id,
                     Area = obj.Area,
@@ -118,9 +118,9 @@ namespace AkaraProject.Controllers
 
             HttpCookie Id = HttpContext.Request.Cookies.Get("AdvertisingId");
             var id = Guid.Parse(Id.Value.ToString());
-            var adver = dBContext.Advertisings.Include("Comments.User").Include("Comments").Where(o => o.Id == id).SingleOrDefault();
-             
-            AddAdvertisingViewModel result = new AddAdvertisingViewModel()
+            var adver = dBContext.Advertisings.Include("Comments.User").Include("Comments").Include("User").Where(o => o.Id == id).SingleOrDefault();
+
+            AdevrtisingViewModel result = new AdevrtisingViewModel()
             {
                 Id=adver.Id,
                 AdvertisingStatuse=adver.AdvertisingStatuse,
@@ -134,7 +134,9 @@ namespace AkaraProject.Controllers
                 Price=adver.Price,
                 Title=adver.Title,
                 UnitType=adver.UnitType,
-                comments=adver.Comments
+                comments=adver.Comments,
+                Owner=adver.User.UserName,
+                OwnerPhone=adver.User.PhoneNumber
             };
           
             return View(result);
@@ -142,7 +144,7 @@ namespace AkaraProject.Controllers
 
 
         [HttpPost]
-        public ActionResult AddComment(AddAdvertisingViewModel model)
+        public ActionResult AddComment(AdevrtisingViewModel model)
         {
            var user= System.Web.HttpContext.Current?.User.Identity.Name.Length;
             HttpCookie Id = HttpContext.Request.Cookies.Get("AdvertisingId");
