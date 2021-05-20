@@ -1,0 +1,160 @@
+﻿@model IEnumerable<AkaraProject.ViewModels.AdevrtisingViewModel>
+@using AkaraProject.CustomeAuthentication;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--Breadcrumbs start-->
+<div class="breadcrumbs overlay-black">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumbs-inner">
+                    <div class="breadcrumbs-title text-center">
+                        <h1>PROPERTIES</h1>
+                    </div>
+                    <div class="breadcrumbs-menu">
+                        <ul>
+                            <li><a href="index.html">Home /</a></li>
+                            <li>PROPERTIES</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Breadcrumbs end-->
+<!--Feature property section-->
+<div class="feature-property pt-130">
+    <div class="container">
+        <div class="row">
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-property mb-40 fadeInUp wow" style="height:500px" data-wow-delay="0.2s">
+                            <span>@item.BuildingStatus</span>
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                if (identity.Role == "Admin")
+                                {
+                                    <span>@item.AdvertisingStatuse</span>
+                                    <span>@item.AdvertisingStatuse</span>
+                                }
+                            }
+                            <div class="property-img" style=" height: 196px;">
+                                <a href="#">
+                                    <img style="height:281px;" src="data:image/png;base64,@item.Image" alt="">
+                                </a>
+                            </div>
+                            <div class="property-desc" style="height: 172px;">
+                                <div class="property-desc-top">
+                                    <h6><a  style=" line-height: 24px;" href="#">@item.Title</a></h6>
+                                    <h4 class="price">@item.Price</h4>
+                                    <div class="property-location">
+                                        <p>
+                                            <img  src="~/Content/Images/property/icon-5.png" alt="">@item.Location
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="property-desc-bottom">
+                                    <div class="property-bottom-list">
+                                        <ul>
+                                            <li>
+                                                <img src="~/Content/Images/property/icon-1.png" alt="">
+                                                <span>@item.Area</span>
+                                            </li>
+
+                                            <li>
+                                                <img src="~/Content/Images/property/icon-1.png" alt="">
+                                                <span>@item.UnitType</span>
+                                            </li>
+                                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                            {
+                                                var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                                if (identity.Role != "Admin")
+                                                {
+                                                    <li>
+                                                        <img src="~/Content/Images/property/icon-2.png" alt="">
+                                                        <span>@item.NoRoom</span>
+                                                    </li>
+
+
+                                                    if (item.BuildingStatus != AkaraProject.Models.BuildingStatus.Close)
+                                                    {
+
+                                                        <li>
+                                                            <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+
+                                                        </li>
+                                                    }
+                                                }
+                                            }
+                                            <li>
+                                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                                {
+                                                    var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                                    if (identity.Role == "Admin" && item.AdvertisingStatuse == AkaraProject.Models.AdvertisingStatuse.Pending)
+                                                    {
+                                                        @Html.ActionLink("Approve", "Approve", "Home", new { id = item.Id }, new { @style = "color:white;text-decoration:none;padding-right:12px;padding-left:12px" })
+
+                                                        @Html.ActionLink("Cancel", "Cancel", "Home", new { id = item.Id }, new { @style = "color:white;text-decoration:none" })
+
+                                                    }
+                                                }
+
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Details", "Details", "Home", new { id = item.Id }, new { @style = "color:white;text-decoration:none" })
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="pagination">
+                    <div class="pagination-inner text-center">
+                        <ul>
+                            <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                            <li class="current">1</li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li>. . . . . .</li>
+                            <li><a href="#">15</a></li>
+                            <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Feature property section end-->
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="~/Scripts/jquery-1.12.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.nivo.slider.pack.js"></script>
+<script src="~/Scripts/waypoints.min.js"></script>
+<script src="~/Scripts/jquery.counterup.min.js"></script>
+<script src="~/Scripts/ajax-mail.js"></script>
+<script src="~/Scripts/owl.carousel.min.js"></script>
+<script src="~/Scripts/jquery.magnific-popup.js"></script>
+<script src="~/Scripts/style-customizer.js"></script>
+<script src="~/Scripts/plugins.js"></script>
+<script src="~/Scripts/main.js"></script>

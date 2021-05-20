@@ -4,7 +4,16 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<style>
 
+    
+
+    .property-tab-menu ul li a {
+        color: white;
+        font-weight: 500;
+        padding: 0;
+    }
+</style>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" interval="false">
     <ol class="carousel-indicators">
@@ -64,10 +73,11 @@
                             aria-controls="rent" aria-selected="false">PROPERTY TO RENT</a>*@
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item" style=" background: blue; height: 36px; padding: 7px;">
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                             {
-                                <a class="nav-link" id="property-rent-tab" data-toggle="tab"
+                                
+                                <a class="nav-link" style="color:white" id="property-rent-tab" data-toggle="tab"
                                    href="add-property.html" role="tab" aria-controls="rent"
                                    aria-selected="false">@Html.ActionLink("ADD PROPERTY", "Add", "Advertising")</a>
                             }

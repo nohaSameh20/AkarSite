@@ -1,0 +1,129 @@
+﻿@model AkaraProject.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "Registration";
+}
+
+<style>
+    .breadcrumbs {
+        background: url(../../Content/Images/common/breadcrumbs.jpg) no-repeat scroll center center;
+        background-size: cover;
+    }
+
+    .register-page-form .Phone::before {
+        content: "\f095";
+        color: #606060;
+        font-family: Icofont;
+        font-size: 16px;
+        left: 72px;
+        position: absolute;
+        top: 209px;
+    }
+    input, textarea, select {
+        max-width: 100% !important;
+    }
+    .register-page-form {
+        width: 100%
+    }
+</style>
+
+<!--Breadcrumbs start-->
+<div class="breadcrumbs overlay-black">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumbs-inner">
+                    <div class="breadcrumbs-title text-center">
+                        <h1>Register</h1>
+                    </div>
+                    <div class="breadcrumbs-menu">
+                        <ul>
+                            <li><a href="index.html">Home /</a></li>
+                            <li>Register</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Breadcrumbs end-->
+<!--Register page inner start-->
+<div class="register-page-inner ptb-100 bg-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-xs-12">
+                <div class="register-page-form">
+                    <div class="account-title">
+                        <h5>Creat an Account</h5>
+                    </div>
+                    @using (Html.BeginForm(null, null, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="formDiv" style="padding-left: 30px;">
+                    <div class="username">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Username" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="email">
+                        @Html.TextBoxFor(m => m.UserEmail, new { @class = "form-control", placeholder = "User Email" })
+                        @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="Phone">
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "User Phone Number" })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="password">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="password">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="image-upload-box">
+                        <label class="custom-file-upload">
+                            <span><i class="icofont icofont-folder-open"></i> Browse Image</span>
+                            @Html.TextBoxFor(model => model.Image, new { type = "file", required = "required" })
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        </label>
+                    </div>
+
+                    <div class="agree-text">
+                        <p>
+                            <label>
+                                <input type="checkbox"> <span>I agree with your</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="register">
+                        <button type="submit">Register</button>
+                    </div>
+                </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--Register page inner end-->
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="~/Scripts/jquery-1.12.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.nivo.slider.pack.js"></script>
+<script src="~/Scripts/waypoints.min.js"></script>
+<script src="~/Scripts/jquery.counterup.min.js"></script>
+<script src="~/Scripts/ajax-mail.js"></script>
+<script src="~/Scripts/owl.carousel.min.js"></script>
+<script src="~/Scripts/jquery.magnific-popup.js"></script>
+<script src="~/Scripts/style-customizer.js"></script>
+<script src="~/Scripts/plugins.js"></script>
+<script src="~/Scripts/main.js"></script>
