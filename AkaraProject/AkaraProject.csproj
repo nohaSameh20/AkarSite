@@ -170,6 +170,10 @@
     <Compile Include="Migrations\202105162343154_mig05.designer.cs">
       <DependentUpon>202105162343154_mig05.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105221807084_mig07.cs" />
+    <Compile Include="Migrations\202105221807084_mig07.designer.cs">
+      <DependentUpon>202105221807084_mig07.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertising\Advertising.cs" />
     <Compile Include="Models\Comments\Comment.cs" />
@@ -446,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105162343154_mig05.resx">
       <DependentUpon>202105162343154_mig05.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105221807084_mig07.resx">
+      <DependentUpon>202105221807084_mig07.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

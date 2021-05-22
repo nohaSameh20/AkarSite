@@ -46,6 +46,7 @@ namespace AkaraProject.Models
         [Required]
         public string Location { get; set; }
 
+        public bool IsDeleted { get; set; }
 
         public User User { set; get; }
         [ForeignKey(nameof(User))]

@@ -27,7 +27,7 @@ namespace AkaraProject.Controllers
             {
                 if (identity.IsInRole("Admin"))
                 {
-                    query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Pending);
+                    query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Pending && !ob.IsDeleted);
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                     result = data.Select(obj => new AdevrtisingViewModel()
                     {
@@ -45,7 +45,7 @@ namespace AkaraProject.Controllers
                     });
                     return View(result);
                 }
-                query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved);
+                query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved && !ob.IsDeleted);
                 data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                 result = data.Select(obj => new AdevrtisingViewModel()
                 {
@@ -79,7 +79,7 @@ namespace AkaraProject.Controllers
                 var identity = ((CustomPrincipal)System.Web.HttpContext.Current?.User);
                 if (ModelState.IsValid)
                 {
-                    query = dBContext.Advertisings.Where(ob => ob.UserId == identity.UserId);
+                    query = dBContext.Advertisings.Where(ob => ob.UserId == identity.UserId && !ob.IsDeleted);
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                     result = data.Select(obj => new AdevrtisingViewModel()
                     {
@@ -139,7 +139,8 @@ namespace AkaraProject.Controllers
                     Title = model.Title,
                     UnitType = model.UnitType,
                     UserId = identity.UserId,
-                    Image= base64
+                    Image= base64,
+                    IsDeleted=false
                 };
 
                 dBContext.Advertisings.Add(advertising);
@@ -160,7 +161,7 @@ namespace AkaraProject.Controllers
 
             HttpCookie Id = HttpContext.Request.Cookies.Get("AdvertisingId");
             var id = Guid.Parse(Id.Value.ToString());
-            var adver = dBContext.Advertisings.Include("Comments.User").Include("Comments").Include("User").Where(o => o.Id == id).SingleOrDefault();
+            var adver = dBContext.Advertisings.Include("Comments.User").Include("Comments").Include("User").Where(o => o.Id == id && !o.IsDeleted).SingleOrDefault();
 
             AdevrtisingViewModel result = new AdevrtisingViewModel()
             {
@@ -219,5 +220,14 @@ namespace AkaraProject.Controllers
 
         }
 
+
+        public ActionResult Delete(Guid Id)
+        {
+            var adver = dBContext.Advertisings.SingleOrDefault(obj => obj.Id == Id);
+            adver.IsDeleted = true;
+
+            dBContext.SaveChanges();
+            return RedirectToAction("ViewMyAdvertising");
+        }
     }
 }

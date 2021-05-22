@@ -27,7 +27,7 @@ namespace AkaraProject.Controllers
                 if (identity.IsInRole("Admin"))
                 {
                     List<AdvertisingStatuse> statuse = new List<AdvertisingStatuse>() { AdvertisingStatuse.Pending, AdvertisingStatuse.Cancelled };
-                    query = dBContext.Advertisings.Where(ob => statuse.Contains(ob.AdvertisingStatuse));
+                    query = dBContext.Advertisings.Where(ob => statuse.Contains(ob.AdvertisingStatuse) && !ob.IsDeleted);
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                     result = data.Select(obj => new AdevrtisingViewModel()
                     {
@@ -46,7 +46,7 @@ namespace AkaraProject.Controllers
                     return View(result);
                 }
 
-                 query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved);
+                 query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved && !ob.IsDeleted);
                  data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                  result = data.Select(obj => new AdevrtisingViewModel()
                 {

@@ -30,7 +30,11 @@
                                                 <h4>@item.Location</h4>
                                                 <p>@item.UnitType</p>
                                                 <p>@item.AdvertisingStatuse</p>
-                                                <p> @Html.ActionLink("Details", "Details", "Home", new { id = item.Id }, new { @style = "color:white;text-decoration:none" })</p>
+                                                <br />
+                                                <br />
+
+                                                @Html.ActionLink("Details", "Details", "Home", new { id = item.Id }, new { @style = "color:white;text-decoration:none" })
+                                                @Html.ActionLink("Delete", "Delete", "Advertising", new { id = item.Id }, new { @style = "color:white;text-decoration:none" })
                                             </div>
                                         </div>
                                     </div>
