@@ -73,10 +73,13 @@ namespace AkaraProject.Controllers
             IQueryable<Advertising> query;
             List<Advertising> data;
             IEnumerable<AdevrtisingViewModel> result;
-            var identity = ((CustomPrincipal)System.Web.HttpContext.Current?.User);
-            if (ModelState.IsValid)
+            var user = System.Web.HttpContext.Current?.User.Identity.Name.Length;
+            if (user != 0)
             {
-                 query = dBContext.Advertisings.Where(ob => ob.UserId == identity.UserId);
+                var identity = ((CustomPrincipal)System.Web.HttpContext.Current?.User);
+                if (ModelState.IsValid)
+                {
+                    query = dBContext.Advertisings.Where(ob => ob.UserId == identity.UserId);
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                     result = data.Select(obj => new AdevrtisingViewModel()
                     {
@@ -93,7 +96,9 @@ namespace AkaraProject.Controllers
                         UnitType = obj.UnitType
                     });
                     return View(result);
+                }
             }
+           
             return View();
         }
 

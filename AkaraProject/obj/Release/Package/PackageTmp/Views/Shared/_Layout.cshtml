@@ -1,0 +1,239 @@
+﻿@using AkaraProject.CustomeAuthentication;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Aakar Map</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico in the root directory -->
+    <link href="~/Content/Images/Logo.png" type="img/x-icon" rel="shortcut icon">
+    <!-- All css files are included here. -->
+    @*<link rel="stylesheet" href="~/Content/css/bootstrap.min.css">*@
+    <link rel="stylesheet" href="~/Content/css/core.css">
+    <link rel="stylesheet" href="~/Content/css/shortcode/shortcodes.css">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="stylesheet" href="~/Content/css/Site.css">
+
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+    <!-- customizer style css -->
+    <link href="~/Content/css/style-customizer.css" rel="stylesheet" />
+    <link href="#" data-style="styles" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="~/Scripts/modernizr-2.8.3.min.js"></script>
+    <title>@ViewBag.Title - Akar Map</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .meanclose {
+            background-color: #76afe1;
+            border-radius: 50%;
+        }
+
+        .fun-fact {
+            background: url('../../Content/Images/fun/cover-bg.png') no-repeat scroll center center;
+        }
+    </style>
+</head>
+<body>
+    <div id="fakeLoader"></div>
+    <!--Preloader end-->
+    <div class="wrapper white_bg">
+        <!--Header section start-->
+        <header class="header">
+            <div class="header-top sticky-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-4 col-sm-6">
+                            <div class="logo">
+                                <a href="index.html"><img src="~/Content/Images/Logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-10 d-none d-lg-block">
+                            <div class="mgea-full-width">
+                                <div class="header-menu">
+                                    <nav>
+                                        <ul>
+                                            <li>
+                                                @Html.ActionLink("Home", "Index", "Home")
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("About", "About", "Home")
+                                            </li>
+
+                                            @if (!(HttpContext.Current.User.Identity.IsAuthenticated))
+                                            {
+                                                <li>
+                                                    @Html.ActionLink("Login", "Login", "Account")
+                                                </li>
+                                            }
+
+                                            @if (!(HttpContext.Current.User.Identity.IsAuthenticated))
+                                            {
+                                                <li>
+                                                    @Html.ActionLink("Register", "Registration", "Account")
+                                                </li>
+                                            }
+
+                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                                            <li> @Html.ActionLink("Services", "Services", "Home")</li>
+
+
+                                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                            {
+                                                var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                                <span style="color: #3791c5;">Welcome @identity.Name</span>
+                                                <li>
+                                                    @Html.ActionLink("LogOut", "LogOut", "Account")
+                                                </li>
+                                            }
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mobile menu start -->
+                <div class="mobile-menu-area d-block d-lg-none">
+                    <div class="container">
+                        <div class="col-12">
+                            <nav id="dropdown">
+                                <ul>
+                                    <li>
+                                        @Html.ActionLink("Home", "Index", "Home")
+                                    </li>
+                                    <li><a href="about-us.html">About</a></li>
+                                    <li>
+                                        @if (!(HttpContext.Current.User.Identity.IsAuthenticated))
+                                        {
+                                            @Html.ActionLink("Login", "Login", "Account")
+                                        }
+                                    </li>
+                                    <li>
+                                        @if (!(HttpContext.Current.User.Identity.IsAuthenticated))
+                                        {
+                                            @Html.ActionLink("Register", "Registration", "Account")
+                                        }
+                                    </li>
+                                    <li>
+                                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                        {
+                                            var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                            @Html.Label(string.Format("Welcome {0}", identity.Name, new { @style = "color: #3791c5;" }))
+                                            @Html.ActionLink("Log out", "LogOut", "Account")
+                                        }
+                                    </li>
+                                    <li><a href="contact.html"> Contact</a></li>
+
+                                    <li><a href="#"> Services</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mobile menu end -->
+            </div>
+        </header>
+        <!--Header section end-->
+
+        <div class=" body-content">
+            @RenderBody()
+
+        </div>
+
+        @if (@TempData["ErrorMessage"] != null)
+        {
+
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="alert alert-warning alert-dismissible fade show d-flex justify-content-center" role="alert" style="background-color: #ff0637;margin-bottom: 84px;color:white">
+                    <strong>@TempData["ErrorMessage"]</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        }
+
+
+        @if (@TempData["SucessMessage"] != null)
+        {
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="alert alert-secondary alert-dismissible fade show d-flex justify-content-center" role="alert" style="background-color: #016701;margin-bottom: 84px;color: white">
+                        <strong>@TempData["SucessMessage"]</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+        }
+
+        <footer class="footer wow fadeIn" data-wow-duration="1.3s" data-wow-delay="0.5s">
+            <!--Footer bottom start-->
+            <div class="footer-bottom">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7 col-12">
+                            <div class="footer-menu">
+                                <ul>
+                                    <li>
+                                        @Html.ActionLink("Home", "Index", "Home")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("About", "About", "Home")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Login", "Login", "Account")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Register", "Registration", "Account")
+                                    </li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                    <li> @Html.ActionLink("Services", "Services", "Home")</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-12">
+                            <div class="copyright">
+                                <p>
+                                    &copy;
+                                    <script>
+                                        document.write(new Date().getFullYear());
+                                    </script> <strong>Our Site </strong> Mede with ❤️ by <strong>Noha Sameh</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Footer bottom end-->
+        </footer>
+    </div>
+    <!-- Modernizr JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery-1.12.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.nivo.slider.pack.js"></script>
+    <script src="~/Scripts/waypoints.min.js"></script>
+    <script src="~/Scripts/jquery.counterup.min.js"></script>
+    <script src="~/Scripts/ajax-mail.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/Scripts/jquery.magnific-popup.js"></script>
+    <script src="~/Scripts/style-customizer.js"></script>
+    <script src="~/Scripts/plugins.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@RenderSection("scripts", required: false)*@
+
+</body>
+</html>

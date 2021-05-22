@@ -1,0 +1,206 @@
+﻿@model AkaraProject.ViewModels.AddAdvertisingViewModel
+@using AkaraProject.Models;
+
+
+@{
+    ViewBag.Title = "Add";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .breadcrumbs {
+        background-size: cover;
+    }
+
+    input, textarea, select {
+        max-width: 100% !important;
+    }
+
+    .add-property-submit {
+        margin-bottom: 12px;
+        text-align: center;
+    }
+</style>
+
+
+<!--Breadcrumbs start-->
+<!--<div class="breadcrumbs overlay-black">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumbs-inner">
+                    <div class="breadcrumbs-title text-center">
+                        <h1>ADD PROPERTY</h1>
+                    </div>
+                    <div class="breadcrumbs-menu">
+                        <ul>
+                            <li><a href="index.html">Home /</a></li>
+                            <li>Add property</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!--Breadcrumbs end-->
+<!-- Add property page start -->
+<div class="add-property-page pt-130">
+    @using (Html.BeginForm(null, null, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="add-property-box step-1">
+                        <div class="step-title">
+                            <h4>Step # 1</h4>
+                        </div>
+                        <div class="basic-information-box">
+                            <div class="information-title">
+                                <h5>Basic Information</h5>
+                            </div>
+                            <div class="basic-information-form">
+                                <div class="row">
+                                    <div class="col-lg-9 col-md-7 col-12">
+                                        <div class="input-file">
+                                            <label>Title</label>
+                                            @Html.TextBoxFor(m => m.Title, new { placeholder = "Enter your title here", required = "required" })
+                                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-5 col-12">
+                                        <div class="input-file">
+                                            <label>Price</label>
+                                            @Html.TextBoxFor(model => model.Price, new { type = "number", min = "1", placeholder = "Price $", required = "required" })
+                                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-12">
+                                        <div class="information-text">
+                                            <label>Property Description</label>
+                                            @Html.TextAreaFor(m => m.Description, new { placeholder = "Write here" })
+                                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-property-box step-2">
+                        <div class="step-title">
+                            <h4>Step # 2</h4>
+                        </div>
+                        <div class="information-title">
+                            <h5>Additional Informations</h5>
+                        </div>
+                        <div class="details-information-box">
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="input-file">
+                                        <label>Location</label>
+                                        @Html.TextBoxFor(m => m.Location, new { placeholder = "Enter Location", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="input-file">
+                                        <label>UnitType</label>
+                                        @Html.DropDownListFor(m => m.UnitType, new SelectList(Enum.GetValues(typeof(UnitType))), "Select UnitType")
+                                        @Html.ValidationMessageFor(model => model.UnitType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="input-file">
+                                        <label>Building Status</label>
+                                        @*@Html.DropDownListFor(m => m.BuildingStatus, (userStatus) => { return userStatus != BuildingStatus.Close }, new SelectList(Enum.GetValues(typeof(BuildingStatus))), "Select Building Status")
+                                            @Html.ValidationMessageFor(model => model.BuildingStatus, "", new { @class = "text-danger" })*@
+                                        @{
+                                            var selectList = Enum.GetValues(typeof(BuildingStatus))
+                                                                 .Cast<BuildingStatus>()
+                                                                 .Where(e => e != BuildingStatus.Close)
+                                                                 .Select(e => new SelectListItem
+                                                                 {
+                                                                     Value = ((int)e).ToString(),
+                                                                     Text = e.ToString()
+                                                                 });
+                                        }
+                                        @Html.DropDownListFor(m => m.BuildingStatus, selectList)
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="input-file">
+                                        <label>No. of Room</label>
+                                        @Html.TextBoxFor(model => model.NoRoom, new { type = "number", min = "0", max = "100", placeholder = "No. Of Rooms" })
+                                        @Html.ValidationMessageFor(model => model.NoRoom, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="input-file">
+                                        <label>Area (quft)</label>
+                                        @Html.TextBoxFor(model => model.Area, new { type = "number", min = "10", placeholder = "Area", required = "required" })
+                                        @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-property-box step-3">
+                        <div class="step-title">
+                            <h4>Step # 3</h4>
+                        </div>
+                        <div class="image-upload-inner">
+                            <div class="information-title">
+                                <h5>Image gallery</h5>
+                            </div>
+                            <div class="image-upload-box">
+                                <label class="custom-file-upload">
+                                    <span><i class="icofont icofont-folder-open"></i> Browse Image</span>
+                                    @Html.TextBoxFor(model => model.Image, new { type = "file", required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-property-submit">
+                        <button type="submit" id="btnPost">ADD PRPPERTY</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<!-- Add property page End -->
+
+
+<script>
+
+    $("#btnPost").click(function () {
+        var adver = new AddAdvertisingViewModel();
+           $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Add")',
+            dataType: 'json',
+            data: JSON.stringify(adver),
+         success: function (data) {
+             alert("true");
+            },
+            error: function (ex) {
+                var r = jQuery.parseJSON(response.responseText);
+                alert("Message: " + r.Message);
+                alert("StackTrace: " + r.StackTrace);
+                alert("ExceptionType: " + r.ExceptionType);
+            }
+        });
+        return false;
+    }
+
+
+
+</script>

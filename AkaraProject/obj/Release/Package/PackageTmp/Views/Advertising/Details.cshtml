@@ -1,0 +1,184 @@
+﻿@model  AkaraProject.ViewModels.AdevrtisingViewModel
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    input, textarea, select {
+        max-width: 100% !important;
+    }
+</style>
+<div class="breadcrumbs overlay-black">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumbs-inner">
+                    <div class="breadcrumbs-title text-center">
+                        <h1>PROPERTIES</h1>
+                    </div>
+                    <div class="breadcrumbs-menu">
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Home/", "Index", "Home")
+                            </li>
+                            <li>properties Details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="feature-property properties-list pt-130">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="single-property-details">
+                    <div class="single-property-area">
+                        <div class="desc-title" style="float:right">
+                            <h5 style="color:blue">Owner:</h5><p>@Model.Owner</p>
+                            <h5 style="color:blue">Owner PhoneNumber:</h5><p>@Model.OwnerPhone</p>
+
+                        </div>
+                        <div class="single-property-tab-content tab-content">
+                            <div class="tab-pane fade show active" id="image-1" role="tabpanel"
+                                 aria-labelledby="image-1-tab">
+                                <img style="width:50% !important" src="data:image/png;base64,@Model.Image" alt="">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="single-property-description">
+                        <div class="desc-title">
+                            <h5>Description</h5>
+                        </div>
+                        <div class="description-inner">
+                            <p class="text-1">
+                                @Model.Description
+                            </p>
+                        </div>
+                    </div>
+                    <div class="condition-amenities">
+                        <div class="row">
+                            <div class="col-lg-12 col-12">
+                                <div class="amenities" >
+                                    <div class="amenities-title">
+                                        <h5>Details:</h5>
+                                    </div>
+                                    <div class="amenities-list">
+                                        <ul>
+                                            <li>
+                                                <i class="fa fa-check-square-o"></i>
+                                                <span>Location: @Model.Location</span>
+                                            </li>
+                                            <li><img src="~/Content/Images/property/icon-6.png" alt=""><span>Area @Model.Area</span></li>
+                                            <li><i class="fa fa-check-square-o"></i><span>Price: @Model.Price</span></li>
+                                            <li><img src="~/Content/Images/property/icon-7.png" alt=""><span>Bedroom: @Model.NoRoom</span></li>
+                                            <li><i class="fa fa-check-square-o"></i> <span>ForWhat: @Model.BuildingStatus</span></li>
+                                            <li><img src="~/Content/Images/property/icon-9.png" alt=""><span>UnitType: @Model.UnitType</span></li>
+                                            @*<li><i class="fa fa-check-square-o"></i> <span>Statuse: @Model.AdvertisingStatuse</span></li>*@
+                                            <li><i class="fa fa-check-square-o"></i> <span>Created Date: @Model.CreatedAt</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    @if (Model.comments.Count() != 0)
+                    {
+                    <div class="feedback">
+                    <div class="feedback-title">
+                        <h5>@Model.comments.Count() Feedbacks</h5>
+                    </div>
+                    @foreach (var item in Model.comments)
+                    {
+                        <div class="single-feedback mb-35 fix">
+                          
+                            <div class="feedback-desc">
+                                @if (item.User == null)
+                                {
+                                    <div class="feedback-img">
+                                        <img src="~/Content/Images/blank-picture-holder.png" alt="">
+                                    </div>
+                                    <h5 class="feedback-post">
+                                        UnKnown Person:
+                                    </h5>
+                                }
+                                @if (item.User != null)
+                                {
+                                    if (item.User.Image != null)
+                                    {
+                                    <div class="feedback-img">
+                                        <img src="data:image/png;base64,@item.User.Image" alt="">
+                                    </div>
+                                    }
+                                    if (item.User.Image == null)
+                                    {
+                                        <div class="feedback-img">
+                                            <img src="~/Content/Images/unnamed.png" alt="">
+                                        </div>
+                                    }
+                                    <h5 class="feedback-post">
+                                        -@item.User.UserName:
+                                    </h5>
+                                }
+                                <div class="review-desc">
+                                    <h6>-@item.Subject</h6>
+                                </div>
+
+                                <h6 class="review-desc">
+                                    -@item.Content
+                                </h6>
+                                <p class="feedback-post">
+                                    -@item.CreatedAt
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+                    }
+                    <div class="leave-review">
+                            <div class="review-title">
+                                <h5>Leave a Review</h5>
+                            </div>
+                            <div class="review-inner">
+                                @using (Html.BeginForm("AddComment", "Advertising", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                                {
+
+                                    <div class="form-bottom">
+                                        <div class="input-field">
+                                            @Html.TextBoxFor(m => m.Subject, new { placeholder = "Enter Subject", required = "required", id = "subject" })
+                                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        @Html.TextAreaFor(m => m.Content, new { placeholder = "Write here", id = "content" })
+                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="submit-form">
+                                        <button type="submit">SUBMIT REVIEW</button>
+                                    </div>
+                                    <br />
+
+                                }
+                            </div>
+                        </div>
+                  
+                    </div>
+                   
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    document.getElementById("subject").value = "";
+    document.getElementById("content").value = "";
+
+</script>
