@@ -37,6 +37,11 @@
 <div class="feature-property pt-130">
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
+                <h5 class="mb-30"> @Model.Count() Adevrtising/s</h5>
+            </div>
+        </div>
+        <div class="row">
             @if (Model != null)
             {
                 foreach (var item in Model)
@@ -60,11 +65,11 @@
                             </div>
                             <div class="property-desc" style="height: 200px;">
                                 <div class="property-desc-top">
-                                    <h6><a  style=" line-height: 24px;" href="#">@item.Title</a></h6>
+                                    <h6><a style=" line-height: 24px;" href="#">@item.Title</a></h6>
                                     <h4 class="price">@item.Price</h4>
                                     <div class="property-location">
                                         <p>
-                                            <img  src="~/Content/Images/property/icon-5.png" alt="">@item.Location
+                                            <img src="~/Content/Images/property/icon-5.png" alt="">@item.Location
                                         </p>
                                     </div>
                                 </div>

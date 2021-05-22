@@ -426,6 +426,7 @@
     <Content Include="Views\Advertising\Details.cshtml" />
     <Content Include="Views\Home\Services.cshtml" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
+    <Content Include="Views\Advertising\ViewMyAdvertising.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202105151052092_mig01.resx">

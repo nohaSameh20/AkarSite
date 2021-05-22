@@ -76,7 +76,9 @@ namespace AkaraProject.Controllers
             var identity = ((CustomPrincipal)System.Web.HttpContext.Current?.User);
             if (ModelState.IsValid)
             {
-                 query = dBContext.Advertisings.Where(ob => ob.UserId == identity.UserId);
+                if (identity.IsInRole("User"))
+                {
+                    query = dBContext.Advertisings.Where(ob =>ob.UserId== identity.UserId);
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                     result = data.Select(obj => new AdevrtisingViewModel()
                     {
@@ -93,6 +95,25 @@ namespace AkaraProject.Controllers
                         UnitType = obj.UnitType
                     });
                     return View(result);
+                }
+                query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved);
+                data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
+                result = data.Select(obj => new AdevrtisingViewModel()
+                {
+                    Id = obj.Id,
+                    Area = obj.Area,
+                    Description = obj.Description,
+                    AdvertisingStatuse = obj.AdvertisingStatuse,
+                    BuildingStatus = obj.BuildingStatus,
+                    Image = obj.Image,
+                    Location = obj.Location,
+                    NoRoom = obj.NoRoom,
+                    Price = obj.Price,
+                    Title = obj.Title,
+                    UnitType = obj.UnitType
+                });
+
+                return View(result);
             }
             return View();
         }
