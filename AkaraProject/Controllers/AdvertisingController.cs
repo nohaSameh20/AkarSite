@@ -227,6 +227,7 @@ namespace AkaraProject.Controllers
             adver.IsDeleted = true;
 
             dBContext.SaveChanges();
+            TempData["SucessMessage"] = $"Adevrising at {adver.Location} Deleted Successfully!!";
             return RedirectToAction("ViewMyAdvertising");
         }
     }
