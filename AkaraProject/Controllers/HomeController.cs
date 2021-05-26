@@ -133,7 +133,7 @@ namespace AkaraProject.Controllers
 
                 query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved && !ob.IsDeleted);
 
-                switch (AdverisingStatuse)
+                switch (BuildingStatuse)
                 {
                     case "2":
                         query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForSale).OrderBy(obj => obj.BuildingStatus);
