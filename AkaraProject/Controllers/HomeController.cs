@@ -26,8 +26,9 @@ namespace AkaraProject.Controllers
             {
                 if (identity.IsInRole("Admin"))
                 {
-                    List<AdvertisingStatuse> statuse = new List<AdvertisingStatuse>() { AdvertisingStatuse.Pending, AdvertisingStatuse.Cancelled };
+                    List<AdvertisingStatuse> statuse = new List<AdvertisingStatuse>() { AdvertisingStatuse.Pending, AdvertisingStatuse.Cancelled, AdvertisingStatuse.Approved };
                     query = dBContext.Advertisings.Where(ob => statuse.Contains(ob.AdvertisingStatuse) && !ob.IsDeleted);
+
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
                     result = data.Select(obj => new AdevrtisingViewModel()
                     {
@@ -80,20 +81,23 @@ namespace AkaraProject.Controllers
             {
                 if (identity.IsInRole("Admin"))
                 {
-                    List<AdvertisingStatuse> statuse = new List<AdvertisingStatuse>() { AdvertisingStatuse.Pending, AdvertisingStatuse.Cancelled };
+                    List<AdvertisingStatuse> statuse = new List<AdvertisingStatuse>() { AdvertisingStatuse.Pending, AdvertisingStatuse.Cancelled,AdvertisingStatuse.Approved };
                     query = dBContext.Advertisings.Where(ob => statuse.Contains(ob.AdvertisingStatuse) && !ob.IsDeleted);
 
                     switch (AdverisingStatuse)
                     {
-                        case "2":
-                            query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForSale).OrderBy(obj => obj.BuildingStatus);
+                        case "1":
+                            query = query.Where(obj => obj.AdvertisingStatuse == AdvertisingStatuse.Cancelled).OrderBy(obj => obj.AdvertisingStatuse);
                             break;
 
+                        case "2":
+                            query = query.Where(obj => obj.AdvertisingStatuse == AdvertisingStatuse.Pending).OrderBy(obj => obj.AdvertisingStatuse);
+                            break;
                         case "3":
-                            query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForRent).OrderBy(obj => obj.BuildingStatus);
+                            query = query.Where(obj => obj.AdvertisingStatuse == AdvertisingStatuse.Approved).OrderBy(obj => obj.AdvertisingStatuse);
                             break;
                         default:
-                            query = query.OrderByDescending(obj => obj.BuildingStatus);
+                            query = query.OrderByDescending(obj => obj.AdvertisingStatuse);
                             break;
                     }
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();

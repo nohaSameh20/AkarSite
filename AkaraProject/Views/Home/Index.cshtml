@@ -23,6 +23,9 @@
     option {
         background: #00f;
     }
+    .property-bottom-list {
+        padding: 2px;
+    }
 </style>
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" interval="false">
@@ -76,11 +79,11 @@
                     <ul class="nav justify-content-md-end" id="property-tab" role="tablist">
                         <li class="nav-item">
                             @*<a class="nav-link active" id="property-sale-tab" data-toggle="tab" href="#sale"
-                                role="tab" aria-controls="sale" aria-selected="true">PROPERTY FOR SALE</a>*@
+            role="tab" aria-controls="sale" aria-selected="true">PROPERTY FOR SALE</a>*@
                         </li>
                         <li class="nav-item">
                             @*<a class="nav-link" id="property-rent-tab" data-toggle="tab" href="#rent" role="tab"
-                                aria-controls="rent" aria-selected="false">PROPERTY TO RENT</a>*@
+            aria-controls="rent" aria-selected="false">PROPERTY TO RENT</a>*@
                         </li>
                         @if (HttpContext.Current.User.Identity.IsAuthenticated)
                         {
@@ -102,34 +105,67 @@
 
                             </li>
 
-                            <li>
-                                <div class="col-md-12">
-                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                    {
-                                        var identity = ((CustomPrincipal)HttpContext.Current.User);
-                                        if (identity.Role == "User")
+
+
+                        }
+
+
+
+                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                        {
+                            var _identity = ((CustomPrincipal)HttpContext.Current.User);
+                            if (_identity.Role == "User")
+                            {
+                                <li>
+                                    <div class="col-md-12">
+                                        var enumData = from AdertisingFilterBy e in Enum.GetValues(typeof(AdertisingFilterBy))
+                                        select new
                                         {
-                                            var enumData = from AdertisingFilterBy e in Enum.GetValues(typeof(AdertisingFilterBy))
-                                                           select new
-                                                           {
-                                                               ID = (int)e,
-                                                               Name = e.ToString()
-                                                           };
+                                        ID = (int)e,
+                                        Name = e.ToString()
+                                        };
 
-                                            ViewBag.EnumList = new SelectList(enumData, "ID", "Name");
+                                        ViewBag.EnumList = new SelectList(enumData, "ID", "Name");
 
-                                            using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "demoForm", name = "demoForm" }))
-                                            {
-                                                @Html.DropDownList("AdverisingStatuse", ViewBag.EnumList as SelectList, "Select Advertinsing Statuse", new { Class = "ddlStyle", onchange = "this.form.submit();" })
-                                            }
+                                        using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "demoForm", name = "demoForm" }))
+                                        {
+                                        @Html.DropDownList("AdverisingStatuse", ViewBag.EnumList as SelectList, "Select Building Statuse", new { Class = "ddlStyle", onchange = "this.form.submit();" })
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        }
+
+
+
+
+                        <li>
+                            <div class="col-md-12">
+                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
+                                    var _identity = ((CustomPrincipal)HttpContext.Current.User);
+                                    if (_identity.Role == "Admin")
+                                    {
+                                        var enumAdminData = from AdminAdvertisingStatuse e in Enum.GetValues(typeof(AdminAdvertisingStatuse))
+                                                            select new
+                                                            {
+                                                                ID = (int)e,
+                                                                Name = e.ToString()
+                                                            };
+
+                                        ViewBag.EnumAdminList = new SelectList(enumAdminData, "ID", "Name");
+
+                                        using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "demoForm", name = "demoForm" }))
+                                        {
+                                            @Html.DropDownList("AdverisingStatuse", ViewBag.EnumAdminList as SelectList, "Select Advertinsing Statuse", new { Class = "ddlStyle", onchange = "this.form.submit();" })
                                         }
                                     }
 
+                                }
 
-                                </div>
-                            </li>
+                            </div>
+                        </li>
 
-                        }
                     </ul>
 
                 </div>

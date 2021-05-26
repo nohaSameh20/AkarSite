@@ -29,4 +29,12 @@ namespace AkaraProject.Models
         Sale=2,
         Rent=3
     }
+
+    public enum AdminAdvertisingStatuse
+    {
+        Cancelled = 1,
+        Pending = 2,
+        Approved = 3,
+        All=4
+    }
 }

@@ -47,6 +47,7 @@
 <div class="add-property-page pt-130">
     @using (Html.BeginForm(null, null, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -70,7 +71,7 @@
                                     <div class="col-lg-3 col-md-5 col-12">
                                         <div class="input-file">
                                             <label>Price</label>
-                                            @Html.TextBoxFor(model => model.Price, new { type = "number", min = "1", placeholder = "Price $", required = "required" })
+                                            @Html.TextBoxFor(model => model.Price, new { type = "number", min = "1", placeholder = "Price L.E", required = "required" })
                                             @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
 
                                         </div>
