@@ -110,32 +110,27 @@
                         }
 
 
-
-                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                        {
-                            var _identity = ((CustomPrincipal)HttpContext.Current.User);
-                            if (_identity.Role == "User")
-                            {
-                                <li>
-                                    <div class="col-md-12">
+                       
+                            <li>
+                                <div class="col-md-12">
+                                    @{
                                         var enumData = from AdertisingFilterBy e in Enum.GetValues(typeof(AdertisingFilterBy))
-                                        select new
-                                        {
-                                        ID = (int)e,
-                                        Name = e.ToString()
-                                        };
+                                                       select new
+                                                       {
+                                                           ID = (int)e,
+                                                           Name = e.ToString()
+                                                       };
 
                                         ViewBag.EnumList = new SelectList(enumData, "ID", "Name");
 
                                         using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "demoForm", name = "demoForm" }))
                                         {
-                                        @Html.DropDownList("AdverisingStatuse", ViewBag.EnumList as SelectList, "Select Building Statuse", new { Class = "ddlStyle", onchange = "this.form.submit();" })
+                                            @Html.DropDownList("BuildingStatuse", ViewBag.EnumList as SelectList, "Select Building Statuse", new { Class = "ddlStyle", onchange = "this.form.submit();" })
                                         }
-                                    </div>
-                                </li>
-                            }
-                        }
-
+                                    }
+                                </div>
+                            </li>
+                       
 
 
 
@@ -182,13 +177,13 @@
                                 {
                                     <div class="item">
                                         <div class="single-property">
-                                            <span>@item.BuildingStatus</span>
+                                            <span >@item.BuildingStatus</span>
                                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                             {
                                                 var identity = ((CustomPrincipal)HttpContext.Current.User);
                                                 if (identity.Role == "Admin")
                                                 {
-                                                    <span>@item.AdvertisingStatuse</span>
+                                                    <span style="left: 236px;">@item.AdvertisingStatuse</span>
                                                 }
                                             }
 

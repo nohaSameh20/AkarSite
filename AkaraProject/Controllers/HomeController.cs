@@ -70,7 +70,7 @@ namespace AkaraProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string AdverisingStatuse)
+        public ActionResult Index(string AdverisingStatuse,string BuildingStatuse)
         {
             IQueryable <Advertising> query;
             List<Advertising> data;
@@ -98,6 +98,19 @@ namespace AkaraProject.Controllers
                             break;
                         default:
                             query = query.OrderByDescending(obj => obj.AdvertisingStatuse);
+                            break;
+                    }
+                    switch (BuildingStatuse)
+                    {
+                        case "2":
+                            query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForSale).OrderBy(obj => obj.BuildingStatus);
+                            break;
+
+                        case "3":
+                            query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForRent).OrderBy(obj => obj.BuildingStatus);
+                            break;
+                        default:
+                            query = query.OrderByDescending(obj => obj.BuildingStatus);
                             break;
                     }
                     data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
