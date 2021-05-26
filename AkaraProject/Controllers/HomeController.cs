@@ -68,7 +68,90 @@ namespace AkaraProject.Controllers
             return View();
         }
 
-       
+        [HttpPost]
+        public ActionResult Index(string AdverisingStatuse)
+        {
+            IQueryable <Advertising> query;
+            List<Advertising> data;
+            IEnumerable<AdevrtisingViewModel> result;
+
+            var identity = (System.Web.HttpContext.Current?.User);
+            if (ModelState.IsValid)
+            {
+                if (identity.IsInRole("Admin"))
+                {
+                    List<AdvertisingStatuse> statuse = new List<AdvertisingStatuse>() { AdvertisingStatuse.Pending, AdvertisingStatuse.Cancelled };
+                    query = dBContext.Advertisings.Where(ob => statuse.Contains(ob.AdvertisingStatuse) && !ob.IsDeleted);
+
+                    switch (AdverisingStatuse)
+                    {
+                        case "2":
+                            query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForSale).OrderBy(obj => obj.BuildingStatus);
+                            break;
+
+                        case "3":
+                            query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForRent).OrderBy(obj => obj.BuildingStatus);
+                            break;
+                        default:
+                            query = query.OrderByDescending(obj => obj.BuildingStatus);
+                            break;
+                    }
+                    data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
+                    result = data.Select(obj => new AdevrtisingViewModel()
+                    {
+                        Id = obj.Id,
+                        Area = obj.Area,
+                        Description = obj.Description,
+                        AdvertisingStatuse = obj.AdvertisingStatuse,
+                        BuildingStatus = obj.BuildingStatus,
+                        Image = obj.Image,
+                        Location = obj.Location,
+                        NoRoom = obj.NoRoom,
+                        Price = obj.Price,
+                        Title = obj.Title,
+                        UnitType = obj.UnitType
+                    });
+                    return View(result);
+                }
+
+                query = dBContext.Advertisings.Where(ob => ob.AdvertisingStatuse == AdvertisingStatuse.Approved && !ob.IsDeleted);
+
+                switch (AdverisingStatuse)
+                {
+                    case "2":
+                        query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForSale).OrderBy(obj => obj.BuildingStatus);
+                        break;
+
+                    case "3":
+                        query = query.Where(obj => obj.BuildingStatus == BuildingStatus.ForRent).OrderBy(obj => obj.BuildingStatus);
+                        break;
+                    default:
+                        query = query.OrderByDescending(obj => obj.BuildingStatus);
+                        break;
+                }
+
+                data = query.OrderByDescending(obj => obj.CreatedAt).ToList();
+                result = data.Select(obj => new AdevrtisingViewModel()
+                {
+                    Id = obj.Id,
+                    Area = obj.Area,
+                    Description = obj.Description,
+                    AdvertisingStatuse = obj.AdvertisingStatuse,
+                    BuildingStatus = obj.BuildingStatus,
+                    Image = obj.Image,
+                    Location = obj.Location,
+                    NoRoom = obj.NoRoom,
+                    Price = obj.Price,
+                    Title = obj.Title,
+                    UnitType = obj.UnitType
+                });
+
+                return View(result);
+            }
+            return View();
+        }
+
+
         public ActionResult Approve(Guid Id)
         {
             var adver = dBContext.Advertisings.SingleOrDefault(obj => obj.Id == Id);

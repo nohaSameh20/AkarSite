@@ -23,4 +23,10 @@ namespace AkaraProject.Models
         Property=2,
         Roof=3
     }
+    public enum AdertisingFilterBy
+    {
+        All=1,
+        Sale=2,
+        Rent=3
+    }
 }
