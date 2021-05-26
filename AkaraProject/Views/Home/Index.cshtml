@@ -104,7 +104,11 @@
 
                             <li>
                                 <div class="col-md-12">
-                                        @{
+                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                    {
+                                        var identity = ((CustomPrincipal)HttpContext.Current.User);
+                                        if (identity.Role == "User")
+                                        {
                                             var enumData = from AdertisingFilterBy e in Enum.GetValues(typeof(AdertisingFilterBy))
                                                            select new
                                                            {
@@ -118,8 +122,8 @@
                                             {
                                                 @Html.DropDownList("AdverisingStatuse", ViewBag.EnumList as SelectList, "Select Advertinsing Statuse", new { Class = "ddlStyle", onchange = "this.form.submit();" })
                                             }
-
                                         }
+                                    }
 
 
                                 </div>
